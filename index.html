@@ -2,52 +2,65 @@
 
 <head>
     <meta charset="UTF-8">
-
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Jquery library   ---->
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="panelLeft">
-            
-        </div>
-
+        <div class="panelLeft"></div>
         <div class="practice">
-            <h1>Hello world in JavaScript
-            </h1>
+            <h1>Hello world in JavaScript</h1>
             <p>
-                Please display a hello world message in JavaScript. 
+                Please display a hello world message in JavaScript.
                 <script>
-                    document.title = "JavaScript Basic -- In class practice -- Yilian Zhang";
+                    document.title = "JavaScript Basic -- In class practice -- Aaron Karius";
                     // use document.write to display a message
-                    
+                    document.write("<p> Hello World!</p>");
                     // use console.log to display a message   
-                  
-                    
+                    console.log("Hello World!");
                 </script>
             </p>
-            <p> Please import external file hello.js here. 
-                
+            <p> Please import external file hello.js here.
+                <script src="js/hello.js"></script>
             </p>
         </div>
 
         <div class="practice">
             <h1> Variable and Arithemetic Operation</h1>
             <p> Practice on variables </p>
+            <script>
+                var a = 1;
+                var b = 2;
+                var c = 3;
+                var d = "Hello World!";
 
-
+                document.write(`<p>${a} + ${b} = ${c}</p>`);
+                document.write(`<p>${c} - ${a} = ${b}</p>`);
+                document.write(`<p>${c} % ${b} = ${a}</p>`);
+                // when to use let and var
+                var message = "great!";
+                if (true) {
+                    var message = "fantastic!";
+                    console.log(`IN the if ${message}`);
+                }
+                console.log(message);
+            </script>
         </div>
 
         <div class="practice">
             <h1> JavaScript Escape Sequence</h1>
             <p> Write an image to the page </p>
-
+            <script>
+                document.write("<img src=\"img/doorclose.jpg\" />");
+                document.write("<img src=\"img/array.gif\" />");
+            </script>
             <p> Write a table to the page </p>
+            <script>
+                document.write("<table><tr><th colspan=\"2\">Info</th></tr><tr><td>Test</td><td>21</td></tr></table>");
+            </script>
 
         </div>
 
@@ -55,16 +68,20 @@
             <h1>Window and Document Object </h1>
             <p> Try alert, open, location, url </p>
             <script>
-
+                // window.alert("Hello world!");
+                // window.open("https://blackboard.sc.edu/?new_loc=%2Fultra%2Finstitution-page");
+                console.log(window.location);
+                console.log(document.lastModified);
+                // window.location.href = "https://blackboard.sc.edu/?new_loc=%2Fultra%2Finstitution-page";
+                // window.URL = "https://www.google.com/";
             </script>
 
         </div>
 
         <div class="practice">
             <h1> Get textcontent of an element </h1>
-            <p>Perform arithmetic operation on <span id="num1"> 4 </span> and <span id="num2">5 </span> </p>
-            <p>Result:
-                <script src="js/arith.js"></script>
+            <p>Perform arithmetic operation on <span id="num1"> 10 </span> and <span id="num2">9
+                    <script src="js/arith.js"></script>
             </p>
 
         </div>
@@ -74,9 +91,12 @@
             <p id="p1"> Paragraph Number One </p>
             <p id="p2"> Paragraph Number two </p>
             <p id="p3"> Paragraph Number three </p>
-            <p>Please write JavaScript code to change the content of each paragraph.​
-            <p>
-
+            <p>Please write JavaScript code to change the content of each paragraph.​</p>
+            <script>
+                document.getElementById("p1").innerHTML = "<i> Changed 1</i>"
+                document.getElementById("p2").innerHTML = "<i> Changed 2</i>"
+                document.getElementById("p3").innerHTML = "<i> Changed 3</i>"
+            </script>
 
         </div>
 
@@ -85,11 +105,15 @@
             <p> Please enter your numbers </p>
             <script>
                 function calculate() {
+                    var num1 = parseInt(document.querySelector("input#test-num1").value);
+                    var num2 = parseInt(document.querySelector("input#test-num2").value);
 
+                    var result = document.getElementById("result");
+                    result.textContent = num1 + num2;
 
                 }
             </script>
-            <p> <input type="text" name="num1" /> + <input type="text" name="num2">
+            <p> <input type="text" name="num1" id="test-num1" /> + <input type="text" name="num2" id="test-num2">
                 <input type="button" value="=" onclick="calculate();">
                 <label id="result"> ? </label>
             </p>
@@ -109,6 +133,16 @@
 
                 </p>
 
+                <script>
+                    function welcome() {
+                        var name = document.getElementById("cName").value;
+                        document.getElementById("message").textContent = `Welcome ${name}!`;
+                    }
+
+                    var e1 = document.getElementById("cName");
+                    e1.addEventListener("blur", welcome, false);
+                </script>
+
                 <p>
                     <label> Email:
                         <input type="text" id="cEmail">
@@ -121,25 +155,45 @@
         <div class="practice">
             <h1> Practice - Calculate Square</h1>
             Calculating Square:
-            <input type="text" id="num" placeholder="Type in a number"> <sup> 2 </sup> =
-            <label id="result"> ? </label>
+            <input type="text" id="numSquare" placeholder="Type in a number"> <sup> 2 </sup> =
+            <label id="resultSquare"> ? </label>
 
+            <script>
+                function calculateSquare() {
+                    var num = document.getElementById("numSquare").value;
+                    Boolean(parseFloat(num)) ?
+                        document.getElementById("resultSquare").textContent =
+                        Math.pow(num, 2).toFixed(2).toString().replace(".00", "")
+                        : document.getElementById("resultSquare").textContent = "Please enter a number."
+                }
+
+                var e1 = document.getElementById("numSquare");
+                e1.addEventListener("blur", calculateSquare, false);
+            </script>
         </div>
 
         <div class="practice">
             <h1> Difference between textcontent and innerHTML</h1>
             <p> HTML Try it Editor </p>
             <p>ENTER your code </p>
-            <textarea cols="40" rows="20" id="code">  
+            <textarea cols="40" rows="20" id="code">
 
             </textarea>
 
-            <input type="button" id="tryit" value="Click and Display"> 
+            <input type="button" id="tryit" value="Click and Display">
 
-            <div id="message"> 
+            <div id="message">
             </div>
 
+            <script>
+                function changeHTML() {
+                    var code = document.getElementById("code").textContent;
+                    document.getElementById("message").innerHTML = code;
+                }
 
+                var btn = document.getElementById("tryit");
+                btn.addEventListener("click", changeHTML, false);
+            </script>
         </div>
 
         <div class="practice">
@@ -149,21 +203,36 @@
                 <select id="year">
                     <option> 2003</option>
                     <option> 2004</option>
-                </select>.</p>
+                </select>.
+            </p>
             <p>Please enter the condition of the car
                 <select id="condition">
                     <option> Fair</option>
                     <option> Good</option>
-                </select>.</p>
+                </select>.
+            </p>
 
             <p id="price">
 
             </p>
 
             <script type="text/javascript">
+                function getCarPrice() {
+                    var year = document.getElementById("year").value;
+                    var condition = document.getElementById("condition").value;
 
+                    var price = 0;
 
+                    // if (year === "2003" && condition === "Fair") {...}
 
+                    year === "2003" ? price += 1000 : price += 2000;
+                    condition === "Fair" ? price += 1000 : price += 2000;
+
+                    document.getElementById("price").textContent = price;
+                }
+
+                document.querySelector("#year").addEventListener("change", getCarPrice, false);
+                document.querySelector("#condition").addEventListener("change", getCarPrice, false);
             </script>
 
         </div>
@@ -174,14 +243,36 @@
                 <input type="text" id="theme">
             </p>
 
+            <script>
+                function changeColor() {
+                    var input = document.querySelector("#theme").value;
+
+                    switch (input) {
+                        case "warm":
+                            document.body.style.backgroundColor = "orange";
+                            break;
+                        case "cool":
+                            document.body.style.backgroundColor = "blue";
+                            break;
+                        case "hot":
+                            document.body.style.backgroundColor = "red";
+                            break;
+                        default:
+                            document.body.style.backgroundColor = "white";
+                    }
+                }
+
+                document.querySelector("#theme").addEventListener("blur", changeColor, false);
+            </script>
+
         </div>
 
 
 
         <div class="practice">
             <h1> Switch practice -- Insurance Application</h1>
-            <p> Choose your coverage
-                <input type="radio" name="coverage" value="100000">100000
+            <p id="coverage-holder"> Choose your coverage
+                <input type="radio" name="coverage" value="100000" checked>100000
                 <input type="radio" name="coverage" value="200000">200000
                 <input type="radio" name="coverage" value="300000">300000
 
@@ -197,12 +288,55 @@
 
             </p>
             <p>
-                <input type="button" value="Check Premium">
+                <input id="check-premium" type="button" value="Check Premium">
             </p>
-            <p id="result">
+            <p id="premiumResult">
 
             </p>
 
+            <script>
+                function checkPremium() {
+                    var coverage = document.querySelector("#coverage-holder input:checked").value;
+                    var age = document.querySelector("#agegroup").value;
+
+                    var premium = 0;
+
+                    switch (coverage) {
+                        case "100000":
+                            premium += 100;
+                            break;
+                        case "200000":
+                            premium += 200;
+                            break;
+                        case "300000":
+                            premium += 300;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch (age) {
+                        case "under 30":
+                            premium += 30;
+                            break;
+                        case "30-34":
+                            premium += 34;
+                            break;
+                        case "35-39":
+                            premium += 39;
+                            break;
+                        case "40-44":
+                            premium += 44;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    document.querySelector("#premiumResult").innerText = premium
+                }
+
+                document.querySelector("#check-premium").addEventListener("click", checkPremium, false);
+            </script>
         </div>
 
 
@@ -210,12 +344,28 @@
 
         <div class="practice">
             <h1>For Loop Practice 1 </h1>
-            <p> Display the square of numer 1... N </p>
+            <p> Display the square of number 1... N </p>
             <p> N = <input type="number" min="1" max="10" id="inputnumber1"> </p>
             <p>
-                <input type="button" value="Click for Square">
+                <input id="click-for-square" type="button" value="Click for Square">
             </p>
 
+            <script>
+                function squares() {
+                    var n = parseInt(document.getElementById("inputnumber1").value);
+
+                    let output = "";
+                    output += "<table><tr><th>num</th><th>value</th></tr>";
+                    for (let i = 1; i <= n; i++) {
+                        output += `<tr><td>${i}</td><td>${Math.pow(i, 2)}</td></tr>`;
+                    }
+                    output += "</table>";
+
+                    document.write(output)
+                }
+
+                document.getElementById("click-for-square").addEventListener("click", squares, false);
+            </script>
         </div>
 
 
@@ -257,7 +407,7 @@
         <div class="practice">
             <h1>Change Attribute -- Rolling a dice </h1>
             <p> <input type="button" id="roll" value="roll" /> </p>
-            <p> <img src="img/die1.png"> </p>
+            <p> <img id="roll-img" src="img/die1.png"> </p>
             <table>
                 <tr>
                     <th>Result</th>
@@ -270,14 +420,24 @@
                 </tr>
                 <tr>
                     <th>Statistics</th>
-                    <td id="r1"></td>
-                    <td id="r2"></td>
-                    <td id="r3"></td>
-                    <td id="r4"></td>
-                    <td id="r5"></td>
-                    <td id="r6"></td>
+                    <td id="r1">0</td>
+                    <td id="r2">0</td>
+                    <td id="r3">0</td>
+                    <td id="r4">0</td>
+                    <td id="r5">0</td>
+                    <td id="r6">0</td>
                 </tr>
             </table>
+            <script>
+                function rollDice() {
+                    var randomNumber = Math.floor(Math.random() * 6) + 1;
+                    console.log(randomNumber);
+                    document.getElementById("roll-img").src = `img/die${randomNumber}.png`;
+                    document.getElementById(`r${randomNumber}`).innerText = parseInt(document.getElementById(`r${randomNumber}`).innerText) + 1;
+                }
+
+                document.getElementById("roll").addEventListener("click", rollDice, false);
+            </script>
 
         </div>
 
@@ -299,9 +459,20 @@
             <div class="img-container-hide">
                 <img src="img/usca5.jpg" alt="usca">
             </div>
-			<script>
-				
-			</script>
+            <script>
+                var imgList = document.querySelectorAll(".img-container-hide")
+                var index = 0;
+                imgList[index].setAttribute("class", "img-container")
+
+                function updateBanner() {
+                    imgList[index].setAttribute("class", "img-container-hide")
+                    ++index;
+                    index = index === 5 ? 0 : index;
+                    imgList[index].setAttribute("class", "img-container");
+                }
+
+                setInterval(updateBanner, 5000);
+            </script>
 
 
         </div>
@@ -336,6 +507,7 @@
                         <input id="lists" type="button" value="List current reservations">
                     </p>
                 </form>
+                <div id="reservations"></div>
                 <script src="js/hotel.js"></script>
             </div>
 
@@ -343,10 +515,10 @@
 
 
         <div class="practice">
-            <h1>  HTML Canvas </h1>
+            <h1> HTML Canvas </h1>
             <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
-                    Your browser does not support the HTML5 canvas tag.</canvas>
-            <div id="drawing">  </div>
+                Your browser does not support the HTML5 canvas tag.</canvas>
+            <div id="drawing"> </div>
             <p> Some P5.js examples </p>
             <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
             <script src="js/draw.js"></script>
